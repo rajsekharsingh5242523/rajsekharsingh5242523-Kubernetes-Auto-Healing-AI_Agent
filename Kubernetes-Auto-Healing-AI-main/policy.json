@@ -1,0 +1,22 @@
+{
+    "memory_remediation": {
+        "description": "Rules governing memory-related incidents (OOMKilled)",
+        "enabled": true,
+        "auto_remediate": false,
+        "allowed_namespaces": [
+            "demo",
+            "default"
+        ],
+        "max_memory_limit": "512Mi",
+        "min_memory_limit": "64Mi",
+        "allowed_actions": [
+            "recommend_increase",
+            "report_only"
+        ],
+        "deny_actions": [
+            "scale_nodes",
+            "delete_pods",
+            "restart_kubelet"
+        ]
+    }
+}
