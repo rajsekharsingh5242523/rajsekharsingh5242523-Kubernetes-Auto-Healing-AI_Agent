@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#060502" />
+  <title>KubeSentinel — Calm incident response</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ink:#fff8e7; --muted:#b7aa91; --line:rgba(245,201,93,.18); --gold:#f3c75f; --amber:#d98d24; --champagne:#ffe4a3; --bg:#060502; }
+    * { box-sizing:border-box; } html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--bg); font-family:"Space Grotesk",sans-serif; overflow-x:hidden; }
+    #particle-background { position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.72; } #particle-background canvas { width:100%!important; height:100%!important; }
+    .veil { position:fixed; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 72% 36%,rgba(217,141,36,.08),transparent 14%,rgba(6,5,2,.28) 38%,rgba(6,5,2,.94) 78%),linear-gradient(90deg,rgba(6,5,2,.48),rgba(6,5,2,.05)); }
+    .wrap { width:min(1120px,calc(100% - 48px)); margin:auto; position:relative; z-index:1; }
+    nav { height:78px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); }
+    .brand { color:var(--ink); font-size:20px; font-weight:700; letter-spacing:-.07em; text-decoration:none; }.brand span { color:var(--gold); }
+    nav a:not(.brand) { color:var(--muted); font:11px "DM Mono",monospace; letter-spacing:.08em; text-decoration:none; text-transform:uppercase; }
+    .hero { min-height:calc(100vh - 78px); padding:clamp(88px,13vh,160px) 0 72px; display:flex; align-items:flex-start; }.hero-copy { width:min(640px,100%); }
+    .eyebrow { display:flex; align-items:center; gap:9px; color:var(--gold); font:11px "DM Mono",monospace; letter-spacing:.12em; text-transform:uppercase; }.eyebrow::before { content:""; width:7px; height:7px; border-radius:50%; background:currentColor; box-shadow:0 0 15px currentColor; }
+    h1 { max-width:620px; margin:20px 0 24px; font-size:clamp(52px,8vw,104px); font-weight:600; letter-spacing:-.085em; line-height:.88; } h1 em { color:var(--champagne); font-style:normal; text-shadow:0 0 32px rgba(243,199,95,.18); }
+    .lede { max-width:490px; color:var(--muted); font-size:17px; line-height:1.65; }.actions { display:flex; gap:11px; flex-wrap:wrap; margin-top:31px; }
+    .button { padding:13px 17px; border:1px solid var(--gold); background:linear-gradient(135deg,var(--champagne),var(--gold) 55%,var(--amber)); color:#181004; font-size:13px; font-weight:700; text-decoration:none; box-shadow:0 8px 28px rgba(217,141,36,.16); }.button.secondary { background:rgba(8,6,2,.3); border-color:var(--line); color:var(--ink); box-shadow:none; backdrop-filter:blur(8px); }
+    .signal { width:min(360px,100%); margin-top:clamp(90px,15vh,190px); margin-left:auto; padding:17px 18px; border:1px solid var(--line); background:rgba(12,9,3,.66); box-shadow:inset 0 1px rgba(255,228,163,.05),0 18px 45px rgba(0,0,0,.18); backdrop-filter:blur(12px); font:12px/1.7 "DM Mono",monospace; }.signal-head { display:flex; justify-content:space-between; color:var(--muted); border-bottom:1px solid var(--line); padding-bottom:11px; margin-bottom:14px; }.live { color:var(--gold); }.signal p { margin:8px 0; color:#e7dac0; }.signal p span { color:var(--gold); }
+    .principles { position:relative; z-index:1; border-top:1px solid var(--line); background:rgba(6,5,2,.72); backdrop-filter:blur(10px); }.principles .wrap { display:grid; grid-template-columns:repeat(3,1fr); }.principle { min-height:200px; padding:32px 28px 35px 0; border-right:1px solid var(--line); }.principle+.principle { padding-left:28px; }.principle:last-child { border-right:0; }.number { color:var(--amber); font:11px "DM Mono",monospace; }.principle h2 { margin:44px 0 8px; font-size:20px; letter-spacing:-.05em; }.principle p { margin:0; color:var(--muted); font-size:14px; line-height:1.55; }
+    footer { position:relative; z-index:1; padding:25px 0 33px; background:#060502; color:var(--muted); font:10px "DM Mono",monospace; letter-spacing:.08em; text-transform:uppercase; }
+    @media (max-width:700px) { .wrap { width:min(100% - 36px,1120px); } .hero { min-height:auto; padding:96px 0 100px; } nav a:not(.brand) { display:none; } .signal { margin-top:68px; margin-left:0; } .principles .wrap { grid-template-columns:1fr; }.principle,.principle+.principle { min-height:auto; padding:25px 0; border-right:0; border-bottom:1px solid var(--line); }.principle h2 { margin-top:27px; } .principle:last-child { border-bottom:0; } #particle-background { opacity:.5; } }
+    @media (prefers-reduced-motion:reduce) { #particle-background { display:none; } html { scroll-behavior:auto; } }
+  </style>
+</head>
+<body>
+  <div id="particle-background" aria-hidden="true"></div><div class="veil" aria-hidden="true"></div>
+  <header class="wrap"><nav><a class="brand" href="#top">kube<span>sentinel</span></a><a href="#principles">Policy-gated autonomous SRE</a></nav></header>
+  <main id="top">
+    <section class="wrap hero">
+      <div class="hero-copy"><div class="eyebrow">Kubernetes incident intelligence</div><h1>Respond with <em>clarity,</em> not noise.</h1><p class="lede">KubeSentinel turns cluster signals into a concise diagnosis and a safe next step—while your team stays in control.</p><div class="actions"><a class="button" href="#principles">See how it works</a><a class="button secondary" href="#signal">View live signal</a></div></div>
+      <aside class="signal" id="signal" aria-label="Live incident signal"><div class="signal-head"><span>CLUSTER / DEMO</span><span class="live">● LIVE</span></div><p><span>01</span> signal detected</p><p><span>02</span> evidence correlated</p><p><span>03</span> policy checked</p><p>next: <span>awaiting approval</span></p></aside>
+    </section>
+    <section class="principles" id="principles"><div class="wrap">
+      <article class="principle"><span class="number">01 / OBSERVE</span><h2>Only the signal.</h2><p>Events, logs, and metrics are gathered into one focused incident context.</p></article>
+      <article class="principle"><span class="number">02 / EXPLAIN</span><h2>One clear diagnosis.</h2><p>Local reasoning turns technical evidence into a human-readable recommendation.</p></article>
+      <article class="principle"><span class="number">03 / GUARD</span><h2>Safe by default.</h2><p>Policy gates every action. Nothing changes without the limits you set.</p></article>
+    </div></section>
+  </main>
+  <footer><div class="wrap">KubeSentinel / local · auditable · policy-gated</div></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    (() => {
+      if (!window.THREE || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const count = innerWidth < 700 ? 900 : 2200, radius = 2.1, mount = document.getElementById('particle-background');
+      const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(48, innerWidth / innerHeight, .1, 100); camera.position.set(1.8,.1,5.7);
+      const renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true }); renderer.setPixelRatio(Math.min(devicePixelRatio,1.5)); renderer.setSize(innerWidth,innerHeight); mount.appendChild(renderer.domElement);
+      const geometry = new THREE.BufferGeometry(), base = new Float32Array(count * 3), positions = new Float32Array(count * 3);
+      for (let i=0;i<count;i++) { const phi=Math.acos(1-2*(i+.5)/count), theta=Math.PI*(1+Math.sqrt(5))*i, j=i*3; base[j]=radius*Math.cos(theta)*Math.sin(phi); base[j+1]=radius*Math.sin(theta)*Math.sin(phi); base[j+2]=radius*Math.cos(phi); }
+      positions.set(base); geometry.setAttribute('position',new THREE.BufferAttribute(positions,3));
+      const sphere = new THREE.Points(geometry,new THREE.PointsMaterial({color:0xf3c75f,size:.024,transparent:true,opacity:.76,blending:THREE.AdditiveBlending,depthWrite:false})); scene.add(sphere);
+      const clock = new THREE.Clock(); let raf;
+      function render(){ const t=clock.getElapsedTime(), attr=geometry.attributes.position.array; sphere.rotation.y=t*.16; sphere.rotation.x=t*.06; for(let i=0;i<count;i++){const j=i*3, wave=1+Math.sin(t*1.5+base[j+1]*5)*.028; attr[j]=base[j]*wave;attr[j+1]=base[j+1]*wave;attr[j+2]=base[j+2]*wave;} geometry.attributes.position.needsUpdate=true; renderer.render(scene,camera); raf=requestAnimationFrame(render); }
+      addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);}); document.addEventListener('visibilitychange',()=>{if(document.hidden) cancelAnimationFrame(raf); else {clock.start();render();}}); render();
+    })();
+  </script>
+</body>
+</html>
