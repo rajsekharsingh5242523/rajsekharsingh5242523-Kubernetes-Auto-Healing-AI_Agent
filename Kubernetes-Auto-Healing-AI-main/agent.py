@@ -491,7 +491,7 @@ def verify_recovery(core_api, apps_api):
 def main():
 
     print("=" * 60)
-    print("🚀 KubeSentry AI SRE Agent")
+    print("")
     print("=" * 60)
     print("Mode: Human-approved autonomous remediation")
     print(f"Namespace: {NAMESPACE}")
